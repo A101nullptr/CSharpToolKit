@@ -51,10 +51,12 @@
     <Compile Include="Command.cs" />
     <Compile Include="LogManager\Log.cs" />
     <Compile Include="ProcessManager\Process.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TimeManager\Now.cs" />
+    <Compile Include="TimeManager\Timer.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="TimeManager\" />
+    <Folder Include="NotificationManager\" />
+    <Folder Include="Properties\" />
     <Folder Include="UIManager\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

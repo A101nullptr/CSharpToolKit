@@ -1,8 +1,6 @@
 ﻿using CSharpToolKit.LogManager;
 using System;
-using System.Diagnostics;
 using System.IO;
-using System.Runtime.InteropServices.WindowsRuntime;
 using System.Windows;
 
 namespace CSharpToolKit.ProcessManager

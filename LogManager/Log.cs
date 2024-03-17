@@ -31,10 +31,7 @@ namespace CSharpToolKit.LogManager
         public string CreateLog()
         {
             if (File.Exists(_filePath))
-            {
-                MessageBox.Show($"File {_filePath} already exists.", "Log Error", MessageBoxButton.OK, MessageBoxImage.Information);
                 return _filePath;
-            }
 
             string CreatedPath = _filePath.EndsWith(".txt", StringComparison.OrdinalIgnoreCase) ? _filePath : $"{_filePath}.txt";
             File.Create(CreatedPath).Close();
