@@ -3,29 +3,14 @@
 namespace CSharpToolKit.BrowseManager
 {
     /// <summary>
-    /// Defines methods to browse for folders and files.
+    /// For browsing folders and files.
     /// </summary>
-    interface IBrowseManager
+    public class Browse
     {
         /// <summary>
         /// Displays a dialog box that allows the user to browse for a folder.
         /// </summary>
         /// <returns>The path of the selected folder, or an empty string if no folder is selected.</returns>
-        string LookUpFolder();
-
-        /// <summary>
-        /// Displays a dialog box that allows the user to browse for a file.
-        /// </summary>
-        /// <returns>The path of the selected file, or an empty string if no file is selected.</returns>
-        string LookUpFile(); 
-    }
-
-    /// <summary>
-    /// Implements the IBrowseManager interface for browsing folders and files.
-    /// </summary>
-    public class Browse : IBrowseManager
-    {
-        /// <inheritdoc/>
         public string LookUpFolder()
         {
             string FolderPath = string.Empty;  
@@ -43,7 +28,10 @@ namespace CSharpToolKit.BrowseManager
             return FolderPath;
         }
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Displays a dialog box that allows the user to browse for a file.
+        /// </summary>
+        /// <returns>The path of the selected file, or an empty string if no file is selected.</returns>
         public string LookUpFile()
         {
             string filePath = string.Empty;

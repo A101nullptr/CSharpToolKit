@@ -8,28 +8,12 @@ using System.Windows;
 namespace CSharpToolKit.ProcessManager
 {
     /// <summary>
-    /// Interface for managing processes, inherits IDisposable.
+    ///  Managing processes for starting and ending tasks.
     /// </summary>
-    interface IProcessManager : IDisposable
+    public class Process : IDisposable
     {
-        /// <summary>
-        /// Starts a process task.
-        /// </summary>
-        void StartTask();
-
-        /// <summary>
-        /// Ends a process task.
-        /// </summary>
-        void EndTask();
-    }
-
-    /// <summary>
-    /// Represents a process manager for starting and ending tasks.
-    /// </summary>
-    public class Process : IProcessManager
-    {
-        private string ProcessName { get; set; }
-        private ILogManager LogManager { get; set; }
+        private string _processName { get; set; }
+        private Log _log { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the Process class.
@@ -38,11 +22,13 @@ namespace CSharpToolKit.ProcessManager
         /// <param name="logPath">Path for logging.</param>
         public Process(string task, string logPath)
         {
-            ProcessName = task;
-            LogManager = new Log(logPath); // Instantiates a logger with specified log path
+            _processName = task;
+            _log = new Log(logPath); // Instantiates a logger with specified log path
         }
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Starts a process task.
+        /// </summary>
         public void StartTask()
         {
             if (!IsExecutable())
@@ -50,26 +36,29 @@ namespace CSharpToolKit.ProcessManager
 
             try
             {
-                System.Diagnostics.Process process = System.Diagnostics.Process.Start(ProcessName);
-                LogManager.WriteToLog($"{process.ProcessName} has been activated successfully.");
+                System.Diagnostics.Process process = System.Diagnostics.Process.Start(_processName);
+                _log.WriteToLog($"{process.ProcessName} has been activated successfully.");
             }
             catch (Exception ex)
             {
-                LogManager.WriteToLog($"Error: {ex.Message}");
+                _log.WriteToLog($"Error: {ex.Message}");
             }
         }
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Ends a process task.
+        /// </summary>
         public void EndTask()
         {
             if (!IsExecutable())
                 return;
 
-            System.Diagnostics.Process[] processes = System.Diagnostics.Process.GetProcessesByName(ProcessName);
+            string ProcessWithoutExtension = Path.GetFileNameWithoutExtension(_processName);
+            System.Diagnostics.Process[] processes = System.Diagnostics.Process.GetProcessesByName(ProcessWithoutExtension);
 
             if (processes.Length == 0)
             {
-                MessageBox.Show($"{ProcessName} is not active.", "Process Error", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show($"{_processName} is not active.", "Process Error", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             }
 
@@ -78,11 +67,11 @@ namespace CSharpToolKit.ProcessManager
                 try
                 {
                     process.Kill();
-                    LogManager.WriteToLog($"{process.ProcessName} has been terminated successfully.");
+                    _log.WriteToLog($"{process.ProcessName} has been terminated successfully.");
                 }
                 catch (Exception ex)
                 {
-                    LogManager.WriteToLog($"Error: {ex.Message}");
+                    _log.WriteToLog($"Error: {ex.Message}");
                 }
             }
         }
@@ -93,12 +82,12 @@ namespace CSharpToolKit.ProcessManager
         /// <returns>True if the process is executable; otherwise, false.</returns>
         private bool IsExecutable()
         {
-            _ = LogManager.CreateLog();
+            _ = _log.CreateLog();
 
-            if (ProcessName.EndsWith(".exe", StringComparison.OrdinalIgnoreCase))
+            if (_processName.EndsWith(".exe", StringComparison.OrdinalIgnoreCase))
                 return true;
 
-            MessageBox.Show($"{ProcessName} does not exist.", "Process Error", MessageBoxButton.OK, MessageBoxImage.Information);
+            MessageBox.Show($"{_processName} does not exist.", "Process Error", MessageBoxButton.OK, MessageBoxImage.Information);
 
             return false;
         }
@@ -120,7 +109,7 @@ namespace CSharpToolKit.ProcessManager
         {
             if (disposing)
             {
-                LogManager.Dispose();
+                _log.Dispose();
             }
         }
     }
