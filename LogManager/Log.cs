@@ -114,10 +114,7 @@ namespace CSharpToolKit.LogManager
             }
 
             if (!File.Exists(_filePath))
-            {
-                MessageBox.Show($"File {_filePath} does not exist.\n\nCreate the file then try again.", "Log Error", MessageBoxButton.OK, MessageBoxImage.Information);
-                return false;
-            }
+                CreateLog();
 
             return true;
         }

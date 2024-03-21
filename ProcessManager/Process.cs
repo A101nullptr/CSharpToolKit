@@ -35,11 +35,11 @@ namespace CSharpToolKit.ProcessManager
             try
             {
                 System.Diagnostics.Process process = System.Diagnostics.Process.Start(_processName);
-                _log.WriteToLog($"{process.ProcessName} has been activated successfully.");
+                _log.WriteToLog($"ProcessManager::{process.ProcessName} has been activated successfully.");
             }
             catch (Exception ex)
             {
-                _log.WriteToLog($"Error: {ex.Message}");
+                _log.WriteToLog($"ProcessManager::Error:{ex.Message}");
             }
         }
 
@@ -65,11 +65,11 @@ namespace CSharpToolKit.ProcessManager
                 try
                 {
                     process.Kill();
-                    _log.WriteToLog($"{process.ProcessName} has been terminated successfully.");
+                    _log.WriteToLog($"ProcessManager::{process.ProcessName} has been terminated successfully.");
                 }
                 catch (Exception ex)
                 {
-                    _log.WriteToLog($"Error: {ex.Message}");
+                    _log.WriteToLog($"ProcessManager::Error:{ex.Message}");
                 }
             }
         }

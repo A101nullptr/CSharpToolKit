@@ -34,6 +34,10 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -47,17 +51,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="APIManager\UrbanDictionary.cs" />
     <Compile Include="BrowseManager\Browse.cs" />
     <Compile Include="Command.cs" />
     <Compile Include="LogManager\Log.cs" />
+    <Compile Include="NotificationManager\Email.cs" />
     <Compile Include="ProcessManager\Process.cs" />
     <Compile Include="TimeManager\Now.cs" />
     <Compile Include="TimeManager\Timer.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="NotificationManager\" />
     <Folder Include="Properties\" />
     <Folder Include="UIManager\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
