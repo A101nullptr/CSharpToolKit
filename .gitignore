@@ -1,0 +1,6 @@
+
+/.vs
+Command.cs
+/obj
+/packages
+packages.config
